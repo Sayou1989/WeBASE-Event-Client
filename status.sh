@@ -21,7 +21,7 @@ status(){
         echo "Server $APP_MAIN is running PID($processPid)"
         echo "==============================================================================================="
     else
-        echo "Server $APP_MAINis not running"
+        echo "Server $APP_MAIN is not running"
         echo "==============================================================================================="
     fi
 }

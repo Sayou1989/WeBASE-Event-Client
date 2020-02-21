@@ -54,7 +54,7 @@ public class MQClientListener {
      */
     @SuppressWarnings("unchecked")
     @RabbitListener(queues = "${spring.rabbitmq.username}")
-    public void receive(Channel channel, Message message) {
+    public void receive(Channel channel, Message message) throws IOException {
         log.info("++++++++ mq message body: {}, queue:{}", new String(message.getBody()),
                 message.getMessageProperties());
         try {
@@ -68,7 +68,7 @@ public class MQClientListener {
                         CommonTools.object2JavaBean(json, BlockPushMessage.class);
                 log.info("++++++++ mq blockPushMessage: {}", blockPushMessage.toString());
 
-                // 出块信息处理，如根据快搞查询块信息
+                // 出块信息处理，如根据块搞查询块信息
                 String uri = String.format(FrontRestTools.URI_BLOCK_BY_NUMBER,
                         blockPushMessage.getBlockNumber());
                 Object blockInfo = frontRestTools.getForEntity(blockPushMessage.getGroupId(), uri,
@@ -97,18 +97,14 @@ public class MQClientListener {
             log.info("++++++++ mq 消息消费成功：id：{}", message.getMessageProperties().getDeliveryTag());
 
         } catch (Exception e) {
-            e.printStackTrace();
-            try {
-                // 处理消息失败，是否将消息重新放回队列
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
-                // 拒绝消息
-                // channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
-                // 多条消息被重新发送
-                // channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, true);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            log.info("++++++++ mq 消息消费失败：id：{}", message.getMessageProperties().getDeliveryTag());
+            log.error("++++++++ mq 消息消费失败：id：{} Exception: {}", message.getMessageProperties().getDeliveryTag(), e);
+            
+            // 处理消息失败，是否将消息重新放回队列
+            channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
+            // 拒绝消息
+            // channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
+            // 多条消息被重新发送
+            // channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, true);
         }
     }
 }
