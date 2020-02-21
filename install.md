@@ -5,8 +5,9 @@
 | 序号 | 软件                |
 | ---- | ------------------- |
 | 1    | FISCO-BCOS 2.2.0    |
-| 2    | WeBASE-Front v1.2.2 |
+| 2    | WeBASE-Front v1.2.3 |
 | 3    | Java8或以上版本     |
+| 4    | RabbitMQ新版本      |
 
 
 ## 2. 注意事项

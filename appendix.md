@@ -4,9 +4,9 @@
 
 ### 1.1 Java部署
 
-此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
+>  此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
 
-#### ① 安装包下载
+1. 安装包下载
 
 从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
 
@@ -15,7 +15,7 @@ mkdir /software
 tar -zxvf openjdkXXX.tar.gz /software/
 ```
 
-#### ② 配置环境变量
+2. 配置环境变量
 
 - 修改/etc/profile
 
@@ -38,10 +38,74 @@ export JAVA_HOME CLASSPATH PATH
 source /etc/profile
 ```
 
-#### ③ 查看版本
+3. 查看版本
 
 ```
 java -version
+```
+
+### 1.2 RabbitMQ部署
+
+> RabbitMQ安装需要安装Erlang和RabbitMQ Server。下面给出LInux下使用PackageCloud安装RabbitMQ的示例，也可以参考[官网](https://www.rabbitmq.com/install-rpm.html)进行安装。
+
+==**备注：以下命令如果权限不足则添加sudo**==
+
+1. 运行Package Cloud提供的RabbitMQ Server快速安装脚本
+```
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+```
+
+2. 运行Package Cloud提供的Erlang快速安装脚本
+```
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
+```
+
+3. 使用yum安装Erlang环境
+```
+yum -y install erlang
+```
+
+4. 使用yum安装RabbitMQ Server
+```
+yum -y install rabbitmq-server
+```
+
+5. 启动RabbitMQ服务
+```
+systemctl start rabbitmq-server.service
+```
+
+6. 查看RabbitMQ服务状态
+```
+systemctl status rabbitmq-server.service
+```
+
+7. 安装Web管理插件
+```
+rabbitmq-plugins enable rabbitmq_management
+```
+8. 添加用户
+```
+rabbitmqctl add_user username password
+```
+
+9. 给用户设置管理员权限
+```
+rabbitmqctl set_user_tags username administrator
+```
+
+10. 使用15672端口打开管理网页（ip对应修改）
+```
+http://127.0.0.1:15672/
+```
+
+其他命令
+```
+停止RabbitMQ服务：systemctl stop rabbitmq-server.service
+重启RabbitMQ服务：systemctl restart rabbitmq-server.service
+查看RabbitMQ用户列表：rabbitmqctl list_users
+删除RabbitMQ用户：rabbitmqctl delete_user username
+修改RabbitMQ用户密码：rabbitmqctl oldPassword Username newPassword
 ```
 
 ## 2. 常见问题
