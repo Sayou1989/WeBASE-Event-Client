@@ -1,2 +1,23 @@
-# WeBASE-Event-Client
-WeBASE-Event-Client
+# 客户端事件订阅服务
+​	WeBASE-Event-Client为客户端事件订阅服务。通过调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务注册事件监听，获取消息进行处理。客户端开发流程：
+
+1. 客户端用户向mq-server运维管理员申请账号（用户名和密码、virtual host），运维管理员创建账号，并创建以用户名为名字的队列，然后赋予该账户read其专属队列的权限(topic permission-read)。
+
+   运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
+
+2. 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口注册事件监听。
+
+3. 用户在自己的应用中以用户名密码连接到对应的virtual host，监听自己队列的消息。接收到消息后，解析消息并分类处理。
+
+[部署说明](./install.md)
+
+[接口说明](./interface.md)
+
+## 贡献说明
+请阅读我们的贡献文档，了解如何贡献代码，并提交你的贡献。
+
+希望在您的参与下，WeBASE会越来越好！
+
+## 社区
+联系我们：webase@webank.com
+
