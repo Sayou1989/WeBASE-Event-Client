@@ -4,7 +4,7 @@ WeBASE-Event-Client为客户端事件订阅服务。通过调用[WeBASE-Front](h
 
 - 客户端开发流程：
 
-1. 客户端用户向mq-server运维管理员申请账号（用户名和密码、virtual host），运维管理员创建账号，并创建以用户名为名字的队列，然后赋予该账户read其专属队列的权限(topic permission-read)。
+1. 客户端用户向mq-server运维管理员申请账号（用户名和密码、virtual host），运维管理员创建账号，并创建**以用户名为名字的队列**，然后赋予该账户read其专属队列的权限(permission-read:queueName)。
 
    运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
 
