@@ -17,9 +17,9 @@ WeBASE-Event-Client为客户端事件订阅服务。通过调用[WeBASE-Front](h
 - [接口说明](./interface.md)
 
 ## 贡献说明
-请阅读我们的贡献文档，了解如何贡献代码，并提交你的贡献。
+请阅读我们的[贡献文档](<https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/CONTRIBUTING.html>)，了解如何贡献代码，并提交你的贡献。
 
-希望在您的参与下，WeBASE会越来越好！
+希望在您的参与下，[WeBASE](<https://webasedoc.readthedocs.io/zh_CN/latest/index.html>)会越来越好！
 
 ## 社区
 联系我们：webase@webank.com
